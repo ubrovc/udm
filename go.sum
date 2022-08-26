@@ -55,8 +55,6 @@ github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.m
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
 github.com/evanphx/json-patch v0.5.2/go.mod h1:ZWS5hhDbVDyob71nXKNL0+PWn6ToqBHMikGIFbs31qQ=
-github.com/free5gc/openapi v1.0.4 h1:bC6oqXy8Z+3e532xLMFmrTHvdyv4sNGDPezQSslw5gQ=
-github.com/free5gc/openapi v1.0.4/go.mod h1:KRCnnp0GeK0Bl4gnrX79cQAidKXNENf8VRdG0y9R0Fc=
 github.com/free5gc/util v1.0.3 h1:or/gqHCAi3j2YKd+nzViRnc/tl1tuuJAYxCao6IbOAU=
 github.com/free5gc/util v1.0.3/go.mod h1:DL1Dnryh//Ps5B+hfXbhU1R07fVfrmPs4uuTO4g9yTg=
 github.com/gin-contrib/sse v0.1.0 h1:Y/yl/+YNO8GZSjAhjMsSuLt29uWRFHdHYUb5lYOV9qE=
@@ -184,6 +182,8 @@ github.com/stretchr/testify v1.6.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/stretchr/testify v1.7.0 h1:nwc3DEeHmmLAfoZucVR881uASk0Mfjw8xYJ99tb5CcY=
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/tidwall/pretty v1.0.0/go.mod h1:XNkn88O1ChpSDQmQeStsy+sBenx6DDtFZJxhVysOjyk=
+github.com/ubrovc/openapi v1.0.5-0.20220614132810-fe843183367c h1:wQ89dDCBpShYArMRONXhE8OsU4aQ+J3b32rY0aj6q+4=
+github.com/ubrovc/openapi v1.0.5-0.20220614132810-fe843183367c/go.mod h1:KRCnnp0GeK0Bl4gnrX79cQAidKXNENf8VRdG0y9R0Fc=
 github.com/ugorji/go v1.1.7 h1:/68gy2h+1mWMrwZFeD1kQialdSzAb432dtpeJ42ovdo=
 github.com/ugorji/go v1.1.7/go.mod h1:kZn38zHttfInRq0xu/PH0az30d+z6vm202qpg1oXVMw=
 github.com/ugorji/go/codec v1.1.7 h1:2SvQaVZ1ouYrrKKwoSk2pzd4A9evlKJb9oTL+OaLUSs=

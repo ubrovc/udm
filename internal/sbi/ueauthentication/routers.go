@@ -101,6 +101,13 @@ var routes = Routes{
 		"/:supi/auth-events",
 		HTTPConfirmAuth,
 	},
+
+	{
+		"UpdateAuth",
+		strings.ToUpper("Put"),
+		"/:supi/auth-events/:authEventId",
+		HTTPDeleteAuth,
+	},
 }
 
 /*

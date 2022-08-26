@@ -2,6 +2,8 @@ module github.com/free5gc/udm
 
 go 1.14
 
+replace github.com/free5gc/openapi => github.com/ubrovc/openapi v1.0.5-0.20220614132810-fe843183367c
+
 require (
 	github.com/antihax/optional v1.0.0
 	github.com/antonfisher/nested-logrus-formatter v1.3.1

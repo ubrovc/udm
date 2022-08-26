@@ -568,3 +568,64 @@ func GenerateAuthDataProcedure(authInfoRequest models.AuthenticationInfoRequest,
 	response.Supi = supi
 	return response, nil
 }
+
+// HandleDeleteAuthDataRequest ... handle PUT /:supi/auth-events/:authEventId
+// Deletes the authentication result in the UDM
+func HandleDeleteAuthDataRequest(request *httpwrapper.Request) *httpwrapper.Response {
+	logger.UeauLog.Infoln("Handle ConfirmAuthDataRequest")
+
+	authEvent := request.Body.(models.AuthEvent)
+	supi := request.Params["supi"]
+	authEventId := request.Params["authEventId"]
+
+	header, problemDetails := deleteAuthDataProcedure(authEvent, supi, authEventId)
+
+	if problemDetails != nil {
+		return httpwrapper.NewResponse(int(problemDetails.Status), nil, problemDetails)
+	} else {
+		return httpwrapper.NewResponse(http.StatusOK, header, nil)
+	}
+}
+
+func deleteAuthDataProcedure(authEvent models.AuthEvent, supi string, authEventId string) (header http.Header, problemDetails *models.ProblemDetails) {
+	var createAuthParam Nudr_DataRepository.CreateAuthenticationStatusParamOpts
+	optInterface := optional.NewInterface(authEvent)
+	createAuthParam.AuthEvent = optInterface
+
+	client, err := createUDMClientToUDR(supi)
+	if err != nil {
+		return nil, util.ProblemDetailsSystemFailure(err.Error())
+	}
+
+	// 29.503 - 6.3.6.2.7 AuthEvent - authRemovalInd
+	// When present, it shall indicate the authentication result in the UDM shall be removed.
+	// This IE shall be set as follows:
+	// -	true: authentication result in the UDM shall be removed;
+	// -	false (default): authentication result in the UDM shall not be removed.
+	var resp *http.Response
+	if authEvent.AuthRemovalInd {
+		resp, err = client.AuthEventDocumentApi.DeleteAuthenticationStatus(
+			context.Background(), supi)
+	} else {
+		resp, err = client.AuthenticationStatusDocumentApi.CreateAuthenticationStatus(
+			context.Background(), supi, &createAuthParam)
+	}
+
+	if err != nil {
+		problemDetails = &models.ProblemDetails{
+			Status: int32(resp.StatusCode),
+			Cause:  err.(openapi.GenericOpenAPIError).Model().(models.ProblemDetails).Cause,
+			Detail: err.Error(),
+		}
+
+		logger.UeauLog.Errorln("DeleteAuthData err:", err.Error())
+		return nil, problemDetails
+	}
+	defer func() {
+		if rspCloseErr := resp.Body.Close(); rspCloseErr != nil {
+			logger.UeauLog.Errorf("DeleteAuthData response body cannot close: %+v", rspCloseErr)
+		}
+	}()
+
+	return header, nil
+}
